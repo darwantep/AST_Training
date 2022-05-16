@@ -1,1 +1,1 @@
-# AST_Training
+# GH Demo
