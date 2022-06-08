@@ -23,8 +23,11 @@ jobs:
     # Select a Checkmarx Project Name
           project_name: ${{ github.repository }}
     # Branch name
-          branch: ${{ github.head_ref || github.ref }}
-    # GitHub API Token
-          github_token: ${{ github.token }}
+          branch: ${{ github.ref }}
     # Additional parameters for AST scan
-          additional_params: --tags test1, test2 --scan-types sast,kics,sca
+          additional_params: --tags test1, test2 --scan-types sast,kics --file-filter !readme --report-format sarif --output-name results
+      - name: Upload SARIF file
+        uses: github/codeql-action/upload-sarif@v1
+        with:
+      # Path to SARIF file relative to the root of the repository
+          sarif_file: results.sarif
