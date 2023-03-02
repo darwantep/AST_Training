@@ -25,7 +25,7 @@ steps:
   inputs:
     projectName: 'Hiren_Test'
     enableProxy: false
-    enableSastScan: true
+    enableSastScan: false
     CheckmarxService: 'SAST'
     fullTeamName: '\CxServer'
     incScan: false
