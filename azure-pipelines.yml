@@ -1,22 +1,10 @@
 # Starter pipeline
-- task: Application security testing@2022
-  inputs:
-    projectName: 'Hiren_Test'
-    enableProxy: false
-    enableSastScan: true
-    CheckmarxService: 'SAST'
-    fullTeamName: '\CxServer'
-    incScan: false
-    enableDependencyScan: true
-    dependencyServerURL: 'Checkmarx DevSecOps SCA'
-    scaTeam: '\CxServer'
-    isEnableScaResolver: true
-    pathToScaResolver: 'C:\SCA Resolver\SCA Resolver 1.15.6'
-    scaResolverAddParameters: 's C:\Users\ParasD\Downloads\WebGoat-2023.4\WebGoat-2023.4 -n MyApp -r C:\Users\ParasD\Downloads\WebGoat-2023.4\Result\results.json'
 
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
+
+
 
 trigger:
 - main
@@ -32,3 +20,18 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+
+- task: Application security testing@2022
+  inputs:
+    projectName: 'Hiren_Test'
+    enableProxy: false
+    enableSastScan: true
+    CheckmarxService: 'SAST'
+    fullTeamName: '\CxServer'
+    incScan: false
+    enableDependencyScan: true
+    dependencyServerURL: 'Checkmarx DevSecOps SCA'
+    scaTeam: '\CxServer'
+    isEnableScaResolver: true
+    pathToScaResolver: 'C:\SCA Resolver\SCA Resolver 1.15.6'
+    scaResolverAddParameters: 's C:\Users\ParasD\Downloads\WebGoat-2023.4\WebGoat-2023.4 -n MyApp -r C:\Users\ParasD\Downloads\WebGoat-2023.4\Result\results.json'
