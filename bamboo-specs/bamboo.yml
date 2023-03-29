@@ -12,7 +12,7 @@ stages:
 
 Job cli:
   docker:
-    image: ubuntu:latest
+    image: windows:latest
   tasks:
     - script:
         - /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
