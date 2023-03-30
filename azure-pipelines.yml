@@ -21,17 +21,9 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-- task: Application security testing@2022
+- task: Checkmarx AST@2
   inputs:
-    projectName: 'Hiren_Test'
-    enableProxy: false
-    enableSastScan: false
-    CheckmarxService: 'SAST'
-    fullTeamName: '\CxServer'
-    incScan: false
-    enableDependencyScan: true
-    dependencyServerURL: 'Checkmarx DevSecOps SCA'
-    scaTeam: '\CxServer'
-    isEnableScaResolver: true
-    pathToScaResolver: 'C:\SCA Resolver\SCA Resolver 1.15.6'
-    scaResolverAddParameters: 's C:\Users\ParasD\Downloads\WebGoat-2023.4\WebGoat-2023.4 -n MyApp -r C:\Users\ParasD\Downloads\WebGoat-2023.4\Result\results.json'
+    CheckmarxService: 'ast test'
+    projectName: '$(Build.Repository.Name)'
+    branchName: '$(Build.SourceBranchName)'
+    tenantName: 'dp_wp_account'
