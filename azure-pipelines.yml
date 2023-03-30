@@ -1,12 +1,5 @@
 # Starter pipeline
-- task: Application security testing@2022
-  inputs:
-    projectName: 'test5'
-    enableProxy: false
-    enableSastScan: true
-    CheckmarxService: 'sast'
-    fullTeamName: 'CxServer'
-    enableDependencyScan: false
+
 
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
@@ -29,9 +22,11 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-- task: Checkmarx AST@2
+- task: Application security testing@2022
   inputs:
-    CheckmarxService: 'ast test'
-    projectName: '$(Build.Repository.Name)'
-    branchName: '$(Build.SourceBranchName)'
-    tenantName: 'dp_wp_account'
+    projectName: 'test5'
+    enableProxy: false
+    enableSastScan: true
+    CheckmarxService: 'sast'
+    fullTeamName: 'CxServer'
+    enableDependencyScan: false
