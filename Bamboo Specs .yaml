@@ -1,8 +1,8 @@
 version: 2
 
 plan:
-  project-key: TES
-  key: RC
+  project-key: CXON
+  key: CXON
   name: Checkmarx ast-cli
 
 stages:
