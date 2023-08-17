@@ -1,37 +1,31 @@
-# Starter pipeline
+#
+# Example for a DAST web scan using PowerShell;
+#
+trigger: none
 
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-
-
-trigger:
-- main
+# API key variables are stored in a Library
+variables:
+- group: "CxOne DAST Variables"
 
 pool:
-  name: Default
+  vmImage: "ubuntu-latest"
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+jobs:
+- job: build
+  displayName: 'Initiate DAST scan'
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  steps:
+  # Use PowerShell to do the heavy lifting
+  - powershell: |
+     docker pull checkmarx/dast:latest
+     docker run -e CX_APIKEY=$(CANARY_API_KEY) -v "/home/vsts/work/1/s:/dast_home" checkmarx/dast:latest web --environment-id="99f10aac-6a73-49a3-81b1-0adae9a158fc" --config="/dast_home/DAST-AZURE/dast-config/zap_config.yaml" --base-url=https://eu.ast.checkmarx.net/ --output=/dast_home/DAST-AZURE/test_output --timeout=10000 --update-interval=10 --jvm-properties=-Xmx3G --log-level=info --verbose --retry=3 --retry-delay=20
+     sudo chown -R vsts:docker test_output
+    displayName: 'Run CxOne DAST via PowerShell'
 
-- task: Application security testing@2022
-  inputs:
-    projectName: 'Hiren_Test'
-    enableProxy: false
-    enableSastScan: false
-    CheckmarxService: 'SAST'
-    fullTeamName: '\CxServer'
-    incScan: false
-    enableDependencyScan: true
-    dependencyServerURL: 'Checkmarx DevSecOps SCA'
-    scaTeam: '\CxServer'
-    isEnableScaResolver: true
-    pathToScaResolver: 'C:\SCA Resolver\SCA Resolver 1.15.6'
-    scaResolverAddParameters: 's C:\Users\ParasD\Downloads\WebGoat-2023.4\WebGoat-2023.4 -n MyApp -r C:\Users\ParasD\Downloads\WebGoat-2023.4\Result\results.json'
+  # Publish the contents of the output directory as artifacts
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish CxOne DAST Artifacts'
+
+    inputs:
+      targetPath: '$(Build.SourcesDirectory)/dast_home/DAST-AZURE/test_output'
+      artifact: 'CxOne DAST Artifacts'
