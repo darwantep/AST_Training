@@ -24,6 +24,7 @@ jobs:
       projectName: '00182619'
       enableProxy: false
       enableSastScan: true
+      fullTeamName: '\CxServer'
       #Checkmarks CxSAST service connection
       CheckmarxService: 'CxSAST'
       enableDependencyScan: true
@@ -33,5 +34,5 @@ jobs:
 
       
 
-  
+
   
