@@ -24,4 +24,14 @@ jobs:
       projectName: '00182619'
       enableProxy: false
       enableSastScan: true
+      #Checkmarks CxSAST service connection
+      CheckmarxService: 'CxSAST'
       enableDependencyScan: true
+      #Checkmarks CxSCA  service connection
+      dependencyServerURL: 'CxSCA'
+      scaTeam: '/CxServer'
+
+      
+
+  
+  
