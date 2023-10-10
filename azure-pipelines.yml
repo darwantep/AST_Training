@@ -29,7 +29,7 @@ jobs:
       enableDependencyScan: true
       #Checkmarks CxSCA  service connection
       dependencyServerURL: 'CxSCA'
-      scaTeam: '/CxServer'
+      scaTeam: '\CxServer'
 
       
 
