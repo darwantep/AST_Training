@@ -30,7 +30,7 @@ jobs:
       dependencyServerURL: 'CxSCA'
       scaTeam: '\CxServer'
       isEnableScaResolver: true
-      pathToScaResolver: 'D:\ScaResolver\2.2.5\ScaResolver.exe'
+      pathToScaResolver: 'D:\ScaResolver\2.2.5'
 
       
 
