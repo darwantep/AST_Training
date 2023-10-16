@@ -24,13 +24,13 @@ jobs:
       projectName: '00182619'
       enableProxy: false
       enableSastScan: true
-      fullTeamName: '\CxServer'
-      #Checkmarks CxSAST service connection
       CheckmarxService: 'CxSAST'
+      fullTeamName: '\CxServer'
       enableDependencyScan: true
-      #Checkmarks CxSCA  service connection
       dependencyServerURL: 'CxSCA'
       scaTeam: '\CxServer'
+      isEnableScaResolver: true
+      pathToScaResolver: 'D:\ScaResolver\2.2.5\ScaResolver.exe'
 
       
 
