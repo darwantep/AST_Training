@@ -31,4 +31,4 @@ jobs:
       scaTeam: '\CxServer'
       isEnableScaResolver: true
       pathToScaResolver: 'D:\ScaResolver\2.2.5'
-      scaResolverAddParameters: ''-s D:\Azure Agent\_work\4\s', '-n MyApp' '-r 'D:\Azure Agent\_work\4\s\Result\results.json''
+      scaResolverAddParameters: '-s D:\Azure Agent\_work\4\s, -n MyApp -r D:\Azure Agent\_work\4\s\Result\results.json'
