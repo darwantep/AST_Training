@@ -19,16 +19,11 @@ jobs:
 
   # Publish the contents of the output directory as artifacts
 
-  - task: Application security testing@2023
+  - task: Checkmarx AST@2
     inputs:
-      projectName: '00182619'
-      enableProxy: false
-      enableSastScan: true
-      CheckmarxService: 'CxSAST'
-      fullTeamName: '\CxServer'
-      enableDependencyScan: true
-      dependencyServerURL: 'CxSCA'
-      scaTeam: '\CxServer'
-      isEnableScaResolver: true
-      pathToScaResolver: 'D:\ScaResolver\2.2.5'
-      scaResolverAddParameters: '-s D:\Azure Agent\_work\4\s, -n MyApp -r D:\Azure Agent\_work\4\s\Result\results.json'
+      CheckmarxService: 'CxOne'
+      projectName: '$(Build.Repository.Name)'
+      branchName: '$(Build.SourceBranchName)'
+      tenantName: 'dp_wp_account'
+      additionalParams: '--sca-resolver "D:\ScaResolver\2.2.5\ScaResolver.exe" --sca-resolver-params ''-s D:\Azure Agent\_work\4\s, -n MyApp -r D:\Azure Agent\_work\4\s\Result\results.json'''
+
