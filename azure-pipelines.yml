@@ -25,5 +25,5 @@ jobs:
       projectName: '$(Build.Repository.Name)'
       branchName: '$(Build.SourceBranchName)'
       tenantName: 'dp_wp_account'
-      additionalParams: '--sca-resolver "D:\ScaResolver\2.2.5\ScaResolver.exe" --sca-resolver-params "-s D:\Azure Agent\_work\4\s, -n MyApp -r D:\Azure Agent\_work\4\s\Result\results.json"'
+      additionalParams: '--sca-resolver "D:\ScaResolver\2.2.5\ScaResolver.exe'
 
