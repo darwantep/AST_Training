@@ -19,11 +19,16 @@ jobs:
 
   # Publish the contents of the output directory as artifacts
 
-  - task: Checkmarx AST@2
+  - task: Application security testing@2023
     inputs:
-      CheckmarxService: 'CxOne'
-      projectName: '$(Build.Repository.Name)'
-      branchName: '$(Build.SourceBranchName)'
-      tenantName: '<Your TenantName>'
-      additionalParams: '--sca-resolver <path-to-resolver>'
+      projectName: 'Paras_Test'
+      enableProxy: false
+      enableSastScan: true
+      CheckmarxService: 'CxSAST'
+      fullTeamName: '\CxServer'
+      enableDependencyScan: true
+      dependencyServerURL: 'CxSCA'
+      scaTeam: '\CxServer'
+      isEnableScaResolver: true
+      pathToScaResolver: 'D:\ScaResolver\2.2.5\ScaResolver.exe'
 
