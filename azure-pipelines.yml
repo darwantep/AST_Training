@@ -30,5 +30,6 @@ jobs:
       dependencyServerURL: 'CxSCA'
       scaTeam: '\CxServer'
       isEnableScaResolver: true
-      pathToScaResolver: 'D:\ScaResolver\2.2.5\ScaResolver.exe'
+      pathToScaResolver: 'D:\ScaResolver\2.2.5\'
+      scaResolverAddParameters: '-s D:\Azure Agent\_work\4\s -n Paras_Test -r D:\Azure Agent\_work\4\s\report\'
 
