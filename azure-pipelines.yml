@@ -28,6 +28,7 @@ jobs:
       fullTeamName: '\CxServer'
       enableDependencyScan: true
       dependencyServerURL: 'CxSCA'
+      dependencyFolderExclusion: 'cvs, .svn, .hg , .git, .bzr, bin , obj,  backup, .idea, node_modules, test'
       scaTeam: '\CxServer'
       isEnableScaResolver: true
       pathToScaResolver: 'D:\ScaResolver\2.2.5\'
