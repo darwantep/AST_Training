@@ -31,7 +31,4 @@ jobs:
       dependencyFolderExclusion: 'cvs, .svn, .hg , .git, .bzr, bin , obj,  backup, .idea, node_modules, test'
       scaTeam: '\CxServer'
       isEnableScaResolver: true
-      scaResolverAddParameters: '-s "D:\Azure Agent\_work\4\s" -n "Paras_Azure_Test" -r "D:\Azure Agent\_work\4\s"'
-          
-
-
+      scaResolverAddParameters: -s "D:\Azure Agent\_work\4\s" -n Paras_Azure_Test -r "D:\Azure Agent\_work\4\s"
