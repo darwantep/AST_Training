@@ -2,7 +2,7 @@ version: 2
 
 plan:
   project-key: CXO
-  key: CXO
+  key: BAM
   name: Checkmarx ast-cli
 
 stages:
