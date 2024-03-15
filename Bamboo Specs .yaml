@@ -1,8 +1,8 @@
 version: 2
 
 plan:
-  project-key: CXON
-  key: CXON
+  project-key: CXO
+  key: "CXO
   name: Checkmarx ast-cli
 
 stages:
