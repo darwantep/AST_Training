@@ -58,7 +58,7 @@ steps:
     CheckmarxService: 'CxOne'
     projectName: '$(Build.Repository.Name)'
     branchName: '$(Build.SourceBranchName)'
-    tenantName: 'checkmarx-global-services-internal'
+    tenantName: 'dp_wp_account'
     additionalParams: '--debug --report-format summaryHTML  --scan-types sca --sca-resolver ./ScaResolver --sca-resolver-params "--ignore-dev-dependencies  true --scan-containers --images manuelbcd/vulnapp:latest,debian:10 --log-level Debug --containers-result-path .cxsca-container-results.json"'
 
 - task: PublishBuildArtifacts@1
