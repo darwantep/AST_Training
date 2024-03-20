@@ -1,34 +1,67 @@
-#
-# Example for a web scan using PowerShell;
-#
-trigger: none
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
 
-# API key variables are stored in a Library
-#variables:
-#- group: "CxOne Variables"
+trigger:
+- none
+pr:
+- none
 
 pool:
-  name: Default
+  vmImage: ubuntu-latest
 
-jobs:
-- job: build
-  displayName: 'CxOne Scan'
+variables:
+  syft_version: 'v0.83.1'
 
-  steps:
-  # Use PowerShell to do the heavy lifting
+steps:
+- task: CmdLine@2
+  displayName: 'download scaresolver'
+  inputs:
+    script: |
+      wget https://sca-downloads.s3.amazonaws.com/cli/latest/ScaResolver-linux64.tar.gz
+      tar -xzvf ScaResolver-linux64.tar.gz
+      rm -rf ScaResolver-linux64.tar.gz
 
-  # Publish the contents of the output directory as artifacts
+- task: CmdLine@2
+  displayName: 'install syft'
+  inputs:
+    script: |
+      curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b . $(syft_version)
 
-  - task: Application security testing@2023
-    inputs:
-      projectName: 'Paras_Test'
-      enableProxy: false
-      enableSastScan: true
-      CheckmarxService: 'CxSAST'
-      fullTeamName: '\CxServer'
-      enableDependencyScan: true
-      dependencyServerURL: 'CxSCA'
-      dependencyFolderExclusion: 'cvs, .svn, .hg , .git, .bzr, bin , obj,  backup, .idea, node_modules, test'
-      scaTeam: '\CxServer'
-      isEnableScaResolver: true
-      scaResolverAddParameters: -s "D:\Azure Agent\_work\4\s" -n Paras_Azure_Test -r "D:\Azure Agent\_work\4\s"
+- task: CmdLine@2
+  displayName: 'list all files'
+  inputs:
+    script: |
+      ls -al  
+
+- task: CmdLine@2
+  displayName: 'show syft & ScaResolver version'
+  inputs:
+    script: |
+      ./syft version
+      ./ScaResolver --version
+
+- task: CmdLine@2
+  displayName: 'use bash show syft version'
+  inputs:
+    script: |
+      bash -c './syft version'
+- task: CmdLine@2
+  displayName: 'set path'
+  inputs:
+    script: |
+      PATH=$PATH:$(System.DefaultWorkingDirectory)
+
+- task: Checkmarx AST@2
+  inputs:
+    CheckmarxService: 'CxAST_Canary'
+    projectName: '$(Build.Repository.Name)'
+    branchName: '$(Build.SourceBranchName)'
+    tenantName: 'checkmarx-global-services-internal'
+    additionalParams: '--debug --report-format summaryHTML  --scan-types sca --sca-resolver ./ScaResolver --sca-resolver-params "--ignore-dev-dependencies  true --scan-containers --images manuelbcd/vulnapp:latest,debian:10 --log-level Debug --containers-result-path .cxsca-container-results.json"'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '.cxsca-container-results.json'
+    artifactName: Container_results
