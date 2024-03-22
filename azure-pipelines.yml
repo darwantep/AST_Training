@@ -27,7 +27,7 @@ steps:
   displayName: 'install syft'
   inputs:
     script: |
-      curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b . $(syft_version)
+      curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /app/myagent/_work/1/s
 
 - task: CmdLine@2
   displayName: 'list all files'
