@@ -33,7 +33,7 @@ steps:
   displayName: 'install syft'
   inputs:
     script: |
-      curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /home/vsts/work/1/s $(syft_version)
+      curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/bin/bash $(syft_version)
 
 - task: CmdLine@2
   displayName: 'list all files'
@@ -59,15 +59,15 @@ steps:
     script: |
       PATH=$PATH:$(System.DefaultWorkingDirectory)
 
-#- task: Checkmarx AST@2
-#  inputs:
-#    CheckmarxService: 'CxOne'
-#    projectName: '$(Build.Repository.Name)'
-#    branchName: '$(Build.SourceBranchName)'
-#    tenantName: 'dp_wp_account'
-#    additionalParams: '--debug --report-format summaryHTML  --scan-types sca --sca-resolver ./ScaResolver --sca-resolver-params "--ignore-dev-dependencies  true --scan-containers --images manuelbcd/vulnapp:latest,debian:10 --log-level Debug --containers-result-path .cxsca-container-results.json"'
+- task: Checkmarx AST@2
+  inputs:
+    CheckmarxService: 'CxOne'
+    projectName: '$(Build.Repository.Name)'
+    branchName: '$(Build.SourceBranchName)'
+    tenantName: 'dp_wp_account'
+    additionalParams: '--debug --report-format summaryHTML  --scan-types sca --sca-resolver ./ScaResolver --sca-resolver-params "--ignore-dev-dependencies  true --scan-containers --images manuelbcd/vulnapp:latest,debian:10 --log-level Debug --containers-result-path .cxsca-container-results.json"'
 
-#- task: PublishBuildArtifacts@1
-#  inputs:
-#    pathToPublish: '.cxsca-container-results.json'
-#    artifactName: Container_results
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: '.cxsca-container-results.json'
+    artifactName: Container_results
