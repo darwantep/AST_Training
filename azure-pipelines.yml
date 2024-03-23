@@ -24,6 +24,12 @@ steps:
       rm -rf ScaResolver-linux64.tar.gz
 
 - task: CmdLine@2
+  displayName: 'echo path'
+  inputs:
+    script: |
+      echo $PATH
+
+- task: CmdLine@2
   displayName: 'install syft'
   inputs:
     script: |
@@ -53,15 +59,15 @@ steps:
     script: |
       PATH=$PATH:$(System.DefaultWorkingDirectory)
 
-- task: Checkmarx AST@2
-  inputs:
-    CheckmarxService: 'CxOne'
-    projectName: '$(Build.Repository.Name)'
-    branchName: '$(Build.SourceBranchName)'
-    tenantName: 'dp_wp_account'
-    additionalParams: '--debug --report-format summaryHTML  --scan-types sca --sca-resolver ./ScaResolver --sca-resolver-params "--ignore-dev-dependencies  true --scan-containers --images manuelbcd/vulnapp:latest,debian:10 --log-level Debug --containers-result-path .cxsca-container-results.json"'
+#- task: Checkmarx AST@2
+#  inputs:
+#    CheckmarxService: 'CxOne'
+#    projectName: '$(Build.Repository.Name)'
+#    branchName: '$(Build.SourceBranchName)'
+#    tenantName: 'dp_wp_account'
+#    additionalParams: '--debug --report-format summaryHTML  --scan-types sca --sca-resolver ./ScaResolver --sca-resolver-params "--ignore-dev-dependencies  true --scan-containers --images manuelbcd/vulnapp:latest,debian:10 --log-level Debug --containers-result-path .cxsca-container-results.json"'
 
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: '.cxsca-container-results.json'
-    artifactName: Container_results
+#- task: PublishBuildArtifacts@1
+#  inputs:
+#    pathToPublish: '.cxsca-container-results.json'
+#    artifactName: Container_results
