@@ -33,7 +33,7 @@ steps:
   displayName: 'install syft'
   inputs:
     script: |
-      curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /sbin $(syft_version)
+      curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /home/vsts/.local/bin $(syft_version)
 
 - task: CmdLine@2
   displayName: 'list all files'
