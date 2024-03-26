@@ -45,7 +45,7 @@ steps:
   displayName: 'show syft & ScaResolver version'
   inputs:
     script: |
-      ./syft version
+      /home/vsts/.local/bin/syft version
       ./ScaResolver --version
 
 - task: CmdLine@2
