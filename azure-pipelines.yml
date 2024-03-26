@@ -48,11 +48,11 @@ steps:
       ./syft version
       ./ScaResolver --version
 
-- task: CmdLine@2
-  displayName: 'use bash show syft version'
-  inputs:
-    script: |
-      bash -c './syft version'
+#- task: CmdLine@2
+#  displayName: 'use bash show syft version'
+#  inputs:
+#    script: |
+#      bash -c './syft version'
 - task: CmdLine@2
   displayName: 'set path'
   inputs:
